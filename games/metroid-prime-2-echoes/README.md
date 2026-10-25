@@ -117,7 +117,9 @@ the Trilogy's third Echoes save file.
 - NTSC-U Trilogy only (`R3ME01` rev 0). PAL, Japanese and GameCube releases won't work.
 - Local split screen only. Dolphin NetPlay is untested.
 - Cutscenes and message boxes use player 1's view.
-- The multiplayer "Quit Game?" menu is no longer on a button; leave a session with HOME > Reset.
+- Menu opens the Data Network instead of the multiplayer "Quit Game?" menu; quit from the Data
+  Network's Options.
+- Players have to jump off save stations to stop them asking to save again.
 - On Xbox controllers Wii A (confirm, fire) is RT; the Xbox A button is Wii B.
 
 ## Next steps
