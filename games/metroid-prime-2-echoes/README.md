@@ -54,6 +54,9 @@ fresh game go after player 2 too. Only the NTSC-U Trilogy is supported; the Game
 One Gecko code (gate, single-word patches, and a stub per hook) plus a Dolphin `[OnFrame]` patch
 that writes the hook bodies to unused MEM2 (0x93700000), so the code list stays under Dolphin's
 limit. Every hook's original word is checked against the executable before the codes are built.
+The Gecko part is gated on 23 words of `rs5mp2_p.dol`, one every 256 KB of its code: with only three,
+leaving Echoes let the code handler patch the incoming front end for a frame, which then crashed into a
+hook body ("Invalid read from 0x000014f0").
 Codes, as named in the ini:
 
 - **A, keep inventory:** multiplayer respawns keep items; the spawn point's start items are given
@@ -64,14 +67,15 @@ Codes, as named in the ini:
 - **C, shared rooms:** any player crossing a door switches the room and brings the others along
   (placed behind a collision-ray check, morph ball camera reset).
 - **D, cutscenes:** play full screen from player 1's camera, every player held as in single
-  player; message boxes take the whole screen too.
+  player; message boxes and the Data Network take the whole screen too.
 - **E, Scan Visor and no friendly fire:** scanning works for every player (fallback target picker
   for players 2-4), scan text shows and any player can page it; players can't hurt each other.
 - **F, enemies and bosses:** each enemy's think and messages see the nearest player as player 1;
   bosses that store a target player id (9 classes) are pointed at the nearest player.
-- **G, save stations** under the multiplayer rules. **H, pickups** go to every player (charge beam
-  pulls drops from the single-player range). **I, scan progress** shared. **J, script upgrades**
-  go to every player. **K, map screen** for any controller. **L, shared lives:** a pool set by
+- **G, save stations** under the multiplayer rules. **H, pickups** go to every player. **I, scan progress** shared. **J, script upgrades**
+  go to every player. **K, map screen** for any controller, and the pause button (Wii 2) opens the
+  single-player Data Network (scan and item percentages, Inventory, Logbook) full screen for any
+  controller (the player who opened it controls it), instead of the per-player multiplayer "Quit Game?" menu. **L, shared lives:** a pool set by
   the Deathmatch Kill Limit, refilled by saving; downed players spectate a teammate.
 - **Difficulty:** three small codes (Normal / Veteran / Hypermode, Hypermode on by default).
 - Story RSET is vanilla again (2026-10-24): an earlier "raise only" change blocked the item loss.
@@ -81,13 +85,18 @@ Codes, as named in the ini:
 - No automated suite. Each feature was checked against the running game with Python scripts that
   read and write Dolphin's memory, call game functions through a small hook, and press keys (the
   scripts aren't published; the project repo has the code generator); results are logged per session in [NOTES.md](NOTES.md).
-- Last checks, 2026-10-24, fresh boots with the release codes:
+- 2026-10-24, second round (fresh boots with the release codes):
+  - Exit crash reproduced (quit multiplayer to the main menu), then gone after the gate change: main menu,
+    no warning, and the front end's code at the old hook sites untouched.
+  - Data Network: player 2's Menu opens it full screen; player 2 browses and closes it. The owner's
+    playtest found player 1 couldn't control it (player 2's idle input replaced player 1's each frame); it now
+    takes only the opener's input, and the owner confirmed Menu works for both.
+- Earlier checks, 2026-10-24, fresh boots with the release codes:
   - Hypermode: getter returns 2; a 10-damage enemy hit took player 1 from 99 to 83.7 (x1.53);
     player 1's 10 against an enemy became 5.0.
   - Item loss (Hive Chamber B): both players lost Missiles, Space Jump, Bombs, Boost and Spider Ball.
   - Morph-ball follower through a Landing Site door: moved 57.5 units, ball camera 6.4 units away
     on the next sample, no launch.
-  - Charge beam pull range: changed in code only, not checked live (no drop could be produced).
 - Earlier (2026-10-23): smoke test of the release file on one run: doors, scans, text box, map
   from both players, lives with save Yes/No, boss targeting from each player, frame rate 89-91
   (harness calls per second) in a 16-enemy room.
@@ -108,7 +117,7 @@ the Trilogy's third Echoes save file.
 - NTSC-U Trilogy only (`R3ME01` rev 0). PAL, Japanese and GameCube releases won't work.
 - Local split screen only. Dolphin NetPlay is untested.
 - Cutscenes and message boxes use player 1's view.
-- The charge beam pull change hasn't been seen working in game yet.
+- The multiplayer "Quit Game?" menu is no longer on a button; leave a session with HOME > Reset.
 - On Xbox controllers Wii A (confirm, fire) is RT; the Xbox A button is Wii B.
 
 ## Next steps

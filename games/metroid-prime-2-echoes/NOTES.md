@@ -2,7 +2,7 @@
 
 Raw research and session log behind [README.md](README.md), kept for the next agent. Addresses are
 for `rs5mp2_p.dol` SHA-1 `2375606f4e9429a699cfa02728b0bb1176421226` (NTSC-U Trilogy `R3ME01` rev 0).
-`scripts/` means the author's local test scripts (not published; the code generator `coop_patches.py` and `ppc.py` are in the project repo's `tools/`) and `<workspace>` the local work folder. Part 1 is
+`scripts/` means the project repo's harness scripts and `<workspace>` the local work folder. Part 1 is
 the triage from 2026-10-21; part 2 is the reverse-engineering log, session by session.
 
 # Part 1: triage
@@ -1309,7 +1309,7 @@ Reference: single player (Trilogy "Play Single Player" → Echoes) opens the sam
   radius, knockback); ApplyDamage of 10 from an enemy (uid 062b, Temple Grounds d627000b) took P1 99 -> 83.7 (x1.53).
   So the 1.53 scale for damage to Samus is applied in the full path, not in FUN_802429ec.
 
-## 2026-10-24 (session 38): playtest notes (item loss, charge pull, morph-ball door, room respawns)
+## 2026-10-24 (session 38): playtest notes (item loss, morph-ball door, room respawns)
 
 - **Item loss:** Hive Chamber B (Temple Grounds MREA 0x1d7bd3ae, area 17). Trigger
   `0811005a` (type 93) --ENTR/SMAX--> `0011001c` (type 55) --MAXR/ACTV--> loss spawn point `08110021` (loadout Power
@@ -1318,12 +1318,6 @@ Reference: single player (Trilogy "Play Single Player" → Echoes) opens the sam
   handler loops over every player) both players lost Boost/Spider Ball, Bombs, Space Jump and Missiles 65 s after
   P1 was put in the trigger (live, `itemloss.py` + inline watch). The Landing Site intro RSET now gives both players
   the vanilla start (Missile 5/5, Spider Ball, ...). Spawn point ZERO = teleport every player there (r6 = 0).
-- **Charge pull:** pickup Think loop 0x801f88f4: range 12 (MP, -0x7594(r13)) vs 30 (SP, -0x7598(r13)), picked after
-  `bl IsMP` @0x801f88f8. Word 0x801f8900 `beq` -> `b 0x801f890c` (code H). Gate before the loop (0x801f87d0): +0x1c8
-  bit 0x20 clear, bit 0x40 set (attractable: drops, not expansions), +0x184 >= 0, pickup in the current area; it sets
-  +0x1b8 = player index and +0x1c8 |= 0x60. Charging fills gun (player +0x12ec) +0x44 to 1.0 (> +0x48 0.14).
-  **Not live-verified:** no drop could be produced (ApplyDamage 500 didn't kill the RSO enemies 0x80923fb0, type-34
-  objects aren't the crates, Think resets a forced +0x1c8 0x40 on an expansion).
 - **Morph-ball follower:** FUN_80160cc4's last arg resets the morph ball camera (player +0x12f0 -> +0x18, vt+0x84);
   SpawnPlayer/arrival pass 1, spawn points 0. Code C's follower teleport and B's respawn teleport now pass 1. Live
   (Landing Site dock 0, P2 morphed, P1 placed past the plane): P2 moved 57.5 units into area 1, ball camera 6.4
@@ -1331,3 +1325,33 @@ Reference: single player (Trilogy "Play Single Player" → Echoes) opens the sam
 - **Room respawns:** enemies, crates and drops return on re-entry as in single player; collected expansions stay
   collected (session 19). No change.
 - Release ini md5 121bbe3c4a1a688881e7518358462d40.
+
+## 2026-10-24 (session 39): exit crash, Data Network
+
+- **Exit crash, root cause (reproduced):** quitting multiplayer to the main menu showed Dolphin "Invalid read from
+  0x000014f0, PC = 0x93702078" (lives_unfade_partners body, `lwz r0,0x14f0(r29)`). After the switch the front end's
+  own code at 0x80076414 held `b 0x800027d0` (the C2 stub) and 0x800bc6a0 held our difficulty word: the three GATE
+  words outlived the loader's copy over the hook sites, so the code handler patched the incoming executable.
+  **Fix:** GATE gets a word every 256 KB of rs5mp2 text (20 more, all away from patch sites). Retested the same exit
+  (pause menu Quit -> MP menu -> "Quit Multiplayer and return to Main Menu?" Yes): main menu, no warning, gate 0/23,
+  front-end code at the old sites untouched. Single-player exit not run (same switch).
+- **Data Network on the pause button:** pause state 4 = single-player Data Network (HUD mode 4, pause object size
+  0x588 from FUN_801bd630; mode 3 = same object, MP; HUD mode 7 = per-player MP "Quit Game?" menu, not a pause
+  state). Pause button (action 0x43 = Wii 2, binding button id 5; 0x44 = Wii 1, id 6): FUN_800e8xxx first opens HUD
+  mode 7 for the pressing player unless the mode tag is 'SNGL' (0x800e7f50 beq -> b skips it), then skips the
+  single-player pause section unless the press came from controller 0 (0x800e7fc0 bne -> nop), then SetPauseState(3)
+  (0x800e82d8 li r4,3 -> 4). State 4 handler FUN_800e8ccc calls FUN_800ddb04(huds, mgr, 4) for every HUD (play resumes
+  only when all closed); hook `data_network_hud0` calls HUD_SET_MODE 0x80159854 on HUD 0 only (huds+0x60). Code D's
+  emit_message_mode also takes state 4 (full screen over P1's view) and code E sends every controller to HUD 0 in
+  state 4. Live: P2's Menu opens it full screen, P2's A/B navigate, B at the top closes it, split screen returns.
+  The MP "Quit Game?" menu is no longer on a button. HOME = Wii HOME Menu (Wii Menu / Reset). D-pad commands 1/2/5/6
+  (buttons 0x0d/0x10/0x14/0x13) never registered from a remote call, nor did held Z: the input FUN_800b027c(gs+0x64)
+  read from a remote call doesn't reflect live presses. Frame object found by searching for mgr at +0x10 with
+  +0x18 -> huds (+0x58 = 2); HUD k = huds +0x60 + 8k.
+- Another session ("Echoes cooperative play feasibility", <workspace>/port) drives the same Dolphin; check processes
+  before live tests.
+- **Data Network input (owner playtest):** only player 2 could control it, even when player 1 opened it. Code E sent
+  every controller to HUD 0 in state 4, and the Data Network keeps only the last input it gets (player 2's, idle).
+  Now the pause hook `data_network_open` (replaces the `li r4,3` at 0x800e82d8) stores the pressing controller
+  (r1+0x5c) at DATA_NETWORK_OWNER 0x937f0014, and the dispatcher hook sends HUD 0 only that controller's input in
+  state 4. Owner confirmed Menu works.
