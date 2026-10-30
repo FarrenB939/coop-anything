@@ -5,8 +5,8 @@
 | Engine | Retro Studios in-house engine, Wii (PowerPC), run in Dolphin; Echoes enemies are RSO modules loaded at runtime |
 | Versions tested | Metroid Prime Trilogy NTSC-U `R3ME01` rev 0 (extracted disc); `rs5mp2_p.dol` SHA-256 `5b68271fd75ff1bd48986874d6f9112fc8299a1c93c6ce459fa1a83b8ebeb2b2` (SHA-1 `2375606f4e9429a699cfa02728b0bb1176421226`); Dolphin 2609a, Windows 10 |
 | Projects | [Echoes co-op](https://github.com/FarrenB939/metroid-prime-2-echoes-coop) (Gecko + Dolphin patch codes, split screen, 2-4 players), directory entry "Echoes co-op" |
-| QA level | community-reports (owner playtests on a second PC, two Xbox controllers, opening hours up to the item loss; scripted checks against the running game for each feature; no automated suite) |
-| Last updated | 2026-10-24 |
+| QA level | community-reports (playtests with two Xbox controllers, opening hours up to the item loss; scripted checks against the running game for each feature; no automated suite) |
+| Last updated | 2026-10-30 |
 
 ## Where things stand
 
@@ -64,8 +64,9 @@ Codes, as named in the ini:
 - **B, campaign session:** no match timer or kill limit; choosing Sidehopper Station starts the
   campaign (or continues the co-op save file) with every joined player; a respawned player
   appears next to a teammate with the screen faded back in.
-- **C, shared rooms:** any player crossing a door switches the room and brings the others along
-  (placed behind a collision-ray check, morph ball camera reset).
+- **C, shared rooms:** any player crossing a door switches the room. The others can walk through while
+  the door is open; when it closes, anyone still in the room behind it is placed beside the leader (right,
+  else left, else behind, each spot checked with a collision ray; morph ball camera reset).
 - **D, cutscenes:** play full screen from player 1's camera, every player held as in single
   player; message boxes and the Data Network take the whole screen too.
 - **E, Scan Visor and no friendly fire:** scanning works for every player (fallback target picker
@@ -88,9 +89,9 @@ Codes, as named in the ini:
 - 2026-10-24, second round (fresh boots with the release codes):
   - Exit crash reproduced (quit multiplayer to the main menu), then gone after the gate change: main menu,
     no warning, and the front end's code at the old hook sites untouched.
-  - Data Network: player 2's Menu opens it full screen; player 2 browses and closes it. The owner's
-    playtest found player 1 couldn't control it (player 2's idle input replaced player 1's each frame); it now
-    takes only the opener's input, and the owner confirmed Menu works for both.
+  - Data Network: player 2's Menu opens it full screen; player 2 browses and closes it. A playtest
+    found player 1 couldn't control it (player 2's idle input replaced player 1's each frame); it now takes only
+    the opener's input, and a follow-up playtest confirmed Menu works for both.
 - Earlier checks, 2026-10-24, fresh boots with the release codes:
   - Hypermode: getter returns 2; a 10-damage enemy hit took player 1 from 99 to 83.7 (x1.53);
     player 1's 10 against an enemy became 5.0.
