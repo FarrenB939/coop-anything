@@ -4163,9 +4163,10 @@
   year: 2017
   engine: Unity
   project: SkyCoop
-  url: https://client.citadelservers.com/knowledgebase/1114/How-to-Host-The-Long-Dark-SkyCoop-Mod.html
+  url: https://github.com/Filigrani/SkyCoop
   other_urls:
-  - https://playco-opgame.com/multiplayer-mod/the-long-dark-multiplayer-mod/
+  - https://github.com/RED1cat/SkyCoopInstaller
+  - https://client.citadelservers.com/knowledgebase/1114/How-to-Host-The-Long-Dark-SkyCoop-Mod.html
   kind: mod
   status: partial
   coop_scope:
@@ -4175,17 +4176,20 @@
     items: unknown
   players: up to 32
   networking: dedicated-server
-  open_source: unknown
-  last_activity: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
   qa: none
-  notes: Third-party pages disagree on dedicated server support and say the base game must be downgraded to a compatible
-    version. I did not find the mod's own home page. Hinterland has no multiplayer plans for the original; the sequel
-    BLACKFROST has official co-op planned for 2027.
+  notes: MIT, loads through MelonLoader. The README says the playable branch is BeforeTFTFT for game versions 2.01 to 2.02;
+    the Reborn branch for 2.04 and later is in development and not yet playable; the main branch is the legacy code. Setup
+    help is on the mod Discord linked in the README. A community installer exists (RED1cat/SkyCoopInstaller, v2.3). Player
+    count and dedicated server support come from a third-party hosting guide. Hinterland has no multiplayer plans for the
+    original; the sequel BLACKFROST has official co-op planned for 2027.
   sources:
+  - https://github.com/Filigrani/SkyCoop
+  - https://github.com/RED1cat/SkyCoopInstaller
   - https://client.citadelservers.com/knowledgebase/1114/How-to-Host-The-Long-Dark-SkyCoop-Mod.html
-  - https://playco-opgame.com/multiplayer-mod/the-long-dark-multiplayer-mod/
   - https://co-optimus.com/game/16285/pc/blackfrost-the-long-dark-2.html
-  checked: 2026-10-16
+  checked: '2026-10-30'
 - game: Outer Wilds
   year: 2019
   engine: Unity
@@ -4597,30 +4601,30 @@
 - game: Atomic Heart
   year: 2023
   engine: Unreal Engine 4
-  project: (none found)
-  url: ''
+  project: Atomic Heart Ghost Co-op
+  url: https://github.com/T4ASICK/AtomicHeartOnline
   other_urls: []
-  kind: gap
-  status: none
+  kind: mod
+  status: prototype
   coop_scope:
-    story: unknown
-    enemies: unknown
-    world_state: unknown
-    items: unknown
-  players: unknown
+    players_visible: 'yes'
+    story: 'no'
+    enemies: 'no'
+    world_state: 'no'
+    items: 'no'
+  players: up to 8 (including the host)
   networking: unknown
-  open_source: unknown
-  last_activity: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
   qa: none
-  notes: Only single-player trainers and an internal mod menu exist; the developer dropped multiplayer. Reddit could
-    not be searched with my tool.
+  notes: 'Visual co-op: each player sees the others as a named model with movement, jumps, crouching, weapons, aiming, attacks
+    and reloads, with a teleport-to-partner option. Enemies, damage, quests, items and saves stay separate for each player.
+    Joins through a Steam or LAN lobby. UE4SS for Atomic Heart is installed separately. Pre-release v0.10.6-preview (2026-10-28).
+    MIT.'
   sources:
-  - https://github.com/Skorchekd/AtomicHeartMenu
-  - https://steamcommunity.com/app/668580/discussions/0/3448087385669495683/
-  - https://www.nexusmods.com/atomicheart/mods/230
-  checked: 2026-10-16
-  searched:
-  - search GitHub, Nexus, ModDB and Steam via web search, 2026-10-16
+  - https://github.com/T4ASICK/AtomicHeartOnline
+  - https://github.com/T4ASICK/AtomicHeartOnline/releases/tag/v0.10.6-preview
+  checked: '2026-10-30'
 - game: 'Star Wars Jedi: Fallen Order and Survivor'
   year: 2019
   engine: Unreal Engine 4
@@ -9476,3 +9480,141 @@
   - https://github.com/cranebeaker/coop-anything/blob/main/games/xcom-2/README.md
   checked: '2026-10-25'
   made_with_coop_anything: true
+- game: Cult of the Lamb
+  year: 2022
+  engine: Unity
+  project: Cult of the Lamb Co-op Anything
+  url: https://github.com/XDinka/cult_of_the_lamb_co-op_anything
+  other_urls:
+  - https://github.com/GeoB99/COTLMP
+  kind: mod
+  status: alpha
+  coop_scope:
+    players_visible: 'yes'
+    story: partial
+    enemies: 'yes'
+    world_state: partial
+    items: partial
+  players: unknown
+  networking: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: Online co-op over a Steam lobby, built on COTLMP by GeoB99 (MIT). The friend joins from the main menu and plays
+    on the host save as the Goat. Dungeon runs share the layout, enemies, enemy health, kills and pickups. Installer included.
+    Pre-release v0.9.4 (2026-10-30). The README reports scripted tests with two game copies on one PC and a loopback Steam
+    stand-in, and says real two-account Steam play is not tested yet; we did not re-run the tests.
+  sources:
+  - https://github.com/XDinka/cult_of_the_lamb_co-op_anything
+  - https://github.com/XDinka/cult_of_the_lamb_co-op_anything/releases/tag/v0.9.4
+  checked: '2026-10-30'
+- game: 'Grand Theft Auto: San Andreas'
+  year: 2004
+  engine: RenderWare
+  project: SA:COOP
+  url: https://github.com/Karimov-Akbar/sa-coop
+  other_urls: []
+  kind: mod
+  status: playable
+  coop_scope:
+    players_visible: 'yes'
+    story: 'yes'
+    enemies: 'yes'
+    world_state: 'yes'
+    items: partial
+  players: '2'
+  networking: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: Story co-op for two over the network. The host runs the save and starts missions, and a mission begins once both
+    players stand in the marker. Cutscenes play for both, pedestrians, traffic, police and gangs are shared, vehicles work
+    for both, and each player keeps their own money, skills and look. Needs GTA San Andreas 1.0 US (the README points Steam
+    and Rockstar Launcher owners to a downgrader). The host shares a connection code; it opens the port through UPnP or
+    NAT punching, with an optional relay. v0.3.2 (2026-10-29). MIT. English and Russian README.
+  sources:
+  - https://github.com/Karimov-Akbar/sa-coop
+  - https://github.com/Karimov-Akbar/sa-coop/releases/tag/v0.3.2
+  checked: '2026-10-30'
+- game: FEZ
+  year: 2012
+  engine: XNA (HAT/MonoMod mod loader)
+  project: FezMultiplayerMod
+  url: https://github.com/FEZModding/FezMultiplayerMod
+  other_urls: []
+  kind: mod
+  status: partial
+  coop_scope:
+    players_visible: 'yes'
+    story: 'no'
+    enemies: unknown
+    world_state: 'no'
+    items: unknown
+  players: unknown
+  networking: dedicated-server
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: Online multiplayer where players see each other in the world with customizable names; the README lists text chat,
+    co-op gameplay, competitive modes and spectator mode only as future ideas. Needs the HAT mod loader (v3.0 or later for
+    v0.8.0). Players connect to a server you run yourself (port 7777 by default) or to someone else's, set in the mod's
+    ini file. v0.8.0 (2026-10-07). MIT.
+  sources:
+  - https://github.com/FEZModding/FezMultiplayerMod
+  - https://github.com/FEZModding/FezMultiplayerMod/releases/tag/v0.8.0
+  checked: '2026-10-30'
+- game: Gothic 1 Remake
+  year: unknown
+  engine: Unreal Engine 5.4
+  project: Gothic 1 Remake Coop
+  url: https://github.com/CreativeNa/gothic1-remake-coop
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: 'yes'
+    story: 'no'
+    enemies: 'no'
+    world_state: 'no'
+    items: 'no'
+  players: '2'
+  networking: direct-ip
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: Early prototype. A native DLL is injected into two running game instances and each player sees the other as a puppet
+    with the full skeleton pose (walking, running, crouching, jumping, sword draw and attacks, eating) and equipment, over
+    UDP. Verified on one PC with two windows, including through Couchlink; joining by IP between two PCs is implemented
+    but not tested between different PCs. No shared NPCs, combat, quests or saves. Works only with one exact game build.
+    No prebuilt binaries, you build it. MIT. Not affiliated with Alkimia Interactive or THQ Nordic.
+  sources:
+  - https://github.com/CreativeNa/gothic1-remake-coop
+  checked: '2026-10-30'
+- game: Noita
+  year: 2020
+  engine: Custom engine
+  project: Noita Entangled Worlds
+  url: https://github.com/IntQuant/noita_entangled_worlds
+  other_urls: []
+  kind: mod
+  status: playable
+  coop_scope:
+    players_visible: 'yes'
+    story: unknown
+    enemies: 'yes'
+    world_state: 'yes'
+    items: 'yes'
+  players: unknown
+  networking: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: community-reports
+  notes: 'Online true co-op for Noita. The README lists as synced: players with positions, health, perks and inventories,
+    wand and item usage, items in the world, enemies and their attacks, the pixel grid world, fungal shifts and polymorphing.
+    A proxy app downloads and installs the mod; the README also covers Linux and macOS. v1.6.8 (2026-10-20). Apache-2.0.
+    A showcase video and an active Discord are linked from the README.'
+  sources:
+  - https://github.com/IntQuant/noita_entangled_worlds
+  - https://github.com/IntQuant/noita_entangled_worlds/releases/tag/v1.6.8
+  - https://www.youtube.com/watch?v=mMP-93-RTs0
+  checked: '2026-10-30'
