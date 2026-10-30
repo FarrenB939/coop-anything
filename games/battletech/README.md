@@ -155,7 +155,7 @@ accept the Steam invite from the main menu.
 ## Known issues
 
 - The shared mission opening (0.0.13) is tested on ordinary contracts only, not on story
-  missions or Flashpoints, and has been run by one player with a bot peer so far. Side chatter during a mission is not synced.
+  missions or Flashpoints. Side chatter during a mission is not synced.
 - Everyone controls the whole lance; there are no per-player lances or larger drops yet.
 - Travel, passing time and accepting contracts are the host's; if the guest does them on its
   copy they are lost at the next refresh. Pilot portraits are not synced.
