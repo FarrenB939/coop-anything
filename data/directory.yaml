@@ -9190,3 +9190,33 @@
   sources:
   - https://github.com/alex-ppg/mgs-v-multiplayer-mod
   checked: '2026-10-28'
+- game: Planetbase
+  year: 2015
+  engine: Unity (Mono)
+  project: Planetbase Co-op
+  url: https://github.com/Elwynn18/Planetbase-coop
+  other_urls:
+  - https://github.com/cranebeaker/coop-anything/tree/main/games/planetbase
+  kind: mod
+  status: alpha
+  coop_scope:
+    players_visible: partial
+    story: unknown
+    enemies: unknown
+    world_state: 'yes'
+    items: shared
+  players: 2+
+  networking: steam-relay
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: BepInEx 5 (x86) plugin for Planetbase 1.4.2, host-authoritative mirror. The joiner loads the host's colony from
+    a save built in memory, its simulation is frozen, and its actions are replayed on the host. Players have no avatar;
+    other players' building and component previews show with their name. Steam invites or direct IP (TCP 47610).
+    Windows, or Linux through Proton. Two-copy automated suite under Proton 16/16 with mutation twins (direct IP); the author
+    reports two-PC sessions joined through Steam invites. Tested with two players only. One-file installers for Windows (.bat) and Linux (.sh) install BepInEx and the mod with SHA-256 checks. MIT.
+    Write-up in games/planetbase.
+  sources:
+  - https://github.com/Elwynn18/Planetbase-coop
+  checked: '2026-10-25'
+  made_with_coop_anything: true

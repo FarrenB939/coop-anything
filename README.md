@@ -195,7 +195,7 @@ above gives a feel for it.
   [networking](playbook/networking.md) · [Steam Spacewar relay](playbook/networking-steam-spacewar.md) ·
   [split screen](playbook/split-screen.md) · [console emulators](playbook/console-emulators.md) · [Switch](playbook/switch.md) ·
   [decomp and recomp](playbook/decomp-and-recomp.md) ·
-  [automated QA](playbook/automated-qa.md) · [multi-agent workflows](playbook/multi-agent-workflows.md) ·
+  [automated QA](playbook/automated-qa.md) · [shipping to players](playbook/shipping-to-players.md) · [multi-agent workflows](playbook/multi-agent-workflows.md) ·
   [network chaos](playbook/network-chaos-testing.md) · [desync hunting](playbook/desync-hunting.md) ·
   [fuzzing sync](playbook/fuzzing-coop-sync.md) · [actor ownership](playbook/actor-ownership.md) ·
   [fake world testing](playbook/fake-world-testing.md) · [several game copies](playbook/multi-instance-testing.md) ·
