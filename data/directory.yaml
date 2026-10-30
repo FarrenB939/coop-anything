@@ -9393,3 +9393,32 @@
   - https://github.com/seedhartha/reone
   - https://www.gamestar.de/artikel/sw-kotor-koop,3360443.html
   checked: '2026-10-20'
+- game: A Difficult Game About Climbing
+  year: 2024
+  engine: Unity 2021.3 (Mono)
+  project: ADGAC Co-op
+  url: https://github.com/mrvintentoes/adgac-coop
+  other_urls:
+  - https://github.com/cranebeaker/coop-anything/tree/main/games/a-difficult-game-about-climbing
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: 'yes'
+    world_state: 'no'
+  players: '2-4'
+  networking: steam-relay
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: 'Ghost co-op: every player climbs their own physics climber and sees the others as tinted, name-tagged copies; optional rope pulls players together. BepInEx 5 plugin with Steam lobby plus SteamNetworkingMessages using the game''s own Steamworks.NET (no extra DLLs). Tested only as two game windows linked over localhost UDP and by creating one Steam lobby; no two-account Steam session yet. World objects are not synced and players do not collide. MIT, plugin source in its own repo. Tested on Steam build 20993968. Write-up in games/a-difficult-game-about-climbing.'
+  sources:
+  - https://store.steampowered.com/app/2497920/
+  - https://github.com/ITR13/A-Difficult-Game-About-Climbing-Mods
+  - https://github.com/mrvintentoes/adgac-coop
+  checked: '2026-10-25'
+  made_with_coop_anything: true
+  searched:
+  - 'Repo DIRECTORY.md, games/ (nothing), 2026-10-24'
+  - 'GitHub repository search "A Difficult Game About Climbing", 10 of 13 results read: only single-player BepInEx mods, 2026-10-24'
+  - 'WebSearch (standard), two phrasings: no co-op or multiplayer mod, 2026-10-24'
+  - 'Not checked: Steam Workshop and community, Nexus Mods, Thunderstore, Reddit, Discord, page 2 of the GitHub results'
