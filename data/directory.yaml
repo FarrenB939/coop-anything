@@ -9358,3 +9358,38 @@
   - https://satypardus.itch.io/multiplayer-mod-slime-rancher-2
   - https://satypardus.itch.io/multiplayer-mod-slime-rancher-2/devlog
   checked: 2026-10-23
+- game: 'Star Wars: Knights of the Old Republic'
+  year: 2003
+  engine: reone (engine reimplementation)
+  project: KotOR co-op (McChaffeeFAF fork)
+  url: https://github.com/McChaffeeFAF/kotor-coop
+  other_urls:
+  - https://github.com/seedhartha/reone
+  kind: decomp-port
+  status: alpha
+  coop_scope:
+    players_visible: yes
+    story: partial
+    enemies: yes
+    world_state: yes
+    items: shared
+  players: '2'
+  networking: direct-ip
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: GPL-3.0 fork of reone (the seedhartha engine reimplementation) adding online co-op to the KotOR
+    1 campaign. alpha-0.4.0, 2026-10-15. Story Mode has a host run the story and guests take the party's
+    companions; Free Mode lets guests bring their own characters. Host runs the authoritative simulation and
+    guests send intent; the campaign, enemies and world state are shared, though store, workbench, minigame
+    and Free Mode/chargen flows are not yet gated, so the story scope is partial. Optional join-code service
+    for short codes (direct ip:port works without one). KotOR II's install is optional - it supplies the KotOR II
+    interface and systems, but the game plays KotOR 1 with the KotOR HUD without it. Verified 2 clients on one PC over
+    localhost (direct-ip) with a 77-gate scripted suite run on alpha-0.4.0, published alongside this write-up; not rerun on the current alpha-0.4.4. Two packaging fixes (wrong
+    VC++ runtime; KotOR II treated as required) are an open pull request to the fork
+    (McChaffeeFAF/kotor-coop#1), not yet merged. Source-only, no releases, builds from source.
+  sources:
+  - https://github.com/McChaffeeFAF/kotor-coop
+  - https://github.com/seedhartha/reone
+  - https://www.gamestar.de/artikel/sw-kotor-koop,3360443.html
+  checked: '2026-10-20'
