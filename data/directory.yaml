@@ -178,34 +178,36 @@
   year: 2000
   engine: Dark Engine (NewDark)
   project: NewDark multiplayer beta (Thief2MP.exe) + T2MPFix
-  url: https://www.ttlg.com/forums/showthread.php?t=153456
+  url: https://github.com/D3c3453d/T2MPFix
   other_urls:
-  - https://github.com/D3c3453d/T2MPFix
   - https://github.com/Xanfre/T2Fix
-  - https://www.systemshock.org/index.php?topic=12190.0
   kind: mod
   status: playable
   coop_scope:
+    players_visible: 'yes'
     story: 'yes'
     enemies: 'yes'
     world_state: unknown
     items: unknown
-  players: 2-4
+  players: 2-8
   networking: direct-ip
   open_source: partial
   last_activity: 2026-10
   qa: automated
-  notes: NewDark ships its own multiplayer beta since 1.27 (2019); 1.29 (2026-09) fixes server-list and readables
-    crashes. Stock remote avatars lag, stick on geometry and warp (send only when 4+ units off, physics steering,
-    12-unit snap, and the steering reads uninitialized memory), a 4th joiner kicks two players, and lava does no
-    damage. T2MPFix (MIT-licensed dinput.dll proxy; NewDark itself is closed) has four separate fixes, each switched on
-    its own; automated A/B with real instances shows avatar path deviation max 7.65 -> 0.13 units.
+  notes: >-
+    NewDark's own multiplayer beta (Thief2MP.exe, since 1.27; use 1.29 from 2026-09) lets 2-3 players play the original
+    missions together. T2MPFix (MIT) is a small DLL that every player drops into the game folder. It has four fixes,
+    each of which can be turned off in T2MPFix.ini: (1) smooth movement: other players no longer lag behind, get stuck
+    on doorways, float or jump around (checked in automated tests with real game instances); (2) steering bug: players
+    who don't have T2MPFix no longer trail behind; (3) player limit: up to 8 players, and the last one to join no longer
+    kicks others out (stock: a 4th player kicks two); (4) environmental damage: hazards such as lava hurt again.
   sources:
-  - https://www.ttlg.com/forums/showthread.php?t=146448
   - https://www.ttlg.com/forums/showthread.php?t=153456
-  - https://www.youtube.com/watch?v=aRiVJqx9cnQ
+  - https://www.ttlg.com/forums/showthread.php?t=146448
   - https://www.systemshock.org/index.php?topic=12190.0
-  checked: '2026-10-26'
+  - https://www.youtube.com/watch?v=aRiVJqx9cnQ
+  - https://github.com/cranebeaker/coop-anything/blob/main/games/thief-2/README.md
+  checked: '2026-10-29'
   made_with_coop_anything: true
 - game: Half-Life
   year: 1998
